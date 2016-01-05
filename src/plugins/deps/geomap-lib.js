@@ -2033,11 +2033,17 @@ var componentName = "wb-geomap",
 
 		// register the mouse events
 		geomap.map.events.register( "mouseout", geomap.map, function( event ) {
-			setMapStatus( this, event );
+			var relTarg = event.relatedTarget || event.toElement;
+			if (!$.contains(this.div, relTarg)) {
+				setMapStatus( this, event );
+			}
 		} );
 
 		geomap.map.events.register( "mouseover", geomap.map, function( event ) {
-			setMapStatus( this, event );
+			var relTarg = event.relatedTarget || event.fromElement;
+			if (!$.contains(this.div, relTarg)) {
+				setMapStatus( this, event );
+			}
 		} );
 	},
 
